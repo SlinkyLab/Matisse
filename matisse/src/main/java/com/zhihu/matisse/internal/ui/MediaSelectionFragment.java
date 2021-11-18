@@ -158,6 +158,7 @@ public class MediaSelectionFragment extends Fragment implements
                             }
                             MediaScannerConnection.scanFile(requireContext(), zeroSize.toArray(new String[0]), null, (path, uri) -> {
                             });
+                        } catch (Exception e) {
                         } finally {
                             query.close();
                         }
