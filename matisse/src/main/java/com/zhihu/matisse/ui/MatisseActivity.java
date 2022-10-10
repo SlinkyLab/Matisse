@@ -170,8 +170,12 @@ public class MatisseActivity extends AppCompatActivity implements
         mSelectedCollection.onSaveInstanceState(outState);
         mAlbumCollection.onSaveInstanceState(outState);
         outState.putBoolean("checkState", mOriginalEnable);
-        outState.putString("path", mMediaStoreCompat.getCurrentPhotoPath());
-        outState.putString("uri", mMediaStoreCompat.getCurrentPhotoUri().toString());
+        Uri currentPhotoUri = mMediaStoreCompat.getCurrentPhotoUri();
+        String currentPhotoPath = mMediaStoreCompat.getCurrentPhotoPath();
+        if (currentPhotoUri != null && currentPhotoPath != null) {
+            outState.putString("path", currentPhotoPath);
+            outState.putString("uri", currentPhotoUri.toString());
+        }
     }
 
     @Override
