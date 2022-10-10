@@ -24,6 +24,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.FileProvider;
 import androidx.core.os.EnvironmentCompat;
@@ -139,6 +141,7 @@ public class MediaStoreCompat {
         return mCurrentPhotoUri;
     }
 
+    @Nullable
     public String getCurrentPhotoPath() {
         return mCurrentPhotoPath;
     }

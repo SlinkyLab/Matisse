@@ -4,7 +4,7 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 
-import java.util.logging.Logger;
+import androidx.annotation.NonNull;
 
 /**
  * @author 工藤
@@ -26,7 +26,7 @@ public class SingleMediaScanner implements MediaScannerConnection.MediaScannerCo
         void onScanFinish();
     }
 
-    public SingleMediaScanner(Context context, String mPath, ScanListener mListener) {
+    public SingleMediaScanner(Context context, @NonNull String mPath, ScanListener mListener) {
         this.mPath = mPath;
         this.mListener = mListener;
         this.mMsc = new MediaScannerConnection(context, this);
