@@ -80,6 +80,7 @@ public class MatisseActivity extends AppCompatActivity implements
     private static final int REQUEST_CODE_CAPTURE = 24;
     public static final String CHECK_STATE = "checkState";
     private final AlbumCollection mAlbumCollection = new AlbumCollection();
+    @Nullable
     private MediaStoreCompat mMediaStoreCompat;
     private final SelectedItemCollection mSelectedCollection = new SelectedItemCollection(this);
     private SelectionSpec mSpec;
@@ -170,8 +171,15 @@ public class MatisseActivity extends AppCompatActivity implements
         mSelectedCollection.onSaveInstanceState(outState);
         mAlbumCollection.onSaveInstanceState(outState);
         outState.putBoolean("checkState", mOriginalEnable);
-        Uri currentPhotoUri = mMediaStoreCompat.getCurrentPhotoUri();
-        String currentPhotoPath = mMediaStoreCompat.getCurrentPhotoPath();
+        MediaStoreCompat compat = this.mMediaStoreCompat;
+        if (compat != null) {
+            saveLastSelected(outState, compat);
+        }
+    }
+
+    private void saveLastSelected(@NonNull Bundle outState, @NonNull MediaStoreCompat compat) {
+        Uri currentPhotoUri = compat.getCurrentPhotoUri();
+        String currentPhotoPath = compat.getCurrentPhotoPath();
         if (currentPhotoUri != null && currentPhotoPath != null) {
             outState.putString("path", currentPhotoPath);
             outState.putString("uri", currentPhotoUri.toString());
